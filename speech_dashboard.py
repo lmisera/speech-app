@@ -46,12 +46,35 @@ with tab1:
 
    # Dropdown to select a name
    selected_name = st.selectbox('Select a student:', streamlit_dataframe['Name'].unique())
-   selected_round = st.selectbox('Select a round:', rounds)
-   selected_event = st.selectbox('Select an event:', events)
 
    # Filter data for the selected name
    filtered_data = streamlit_dataframe[streamlit_dataframe['Name'] == selected_name]
    feedback_data = streamlit_dataframe[streamlit_dataframe['Name'] == selected_name]
+
+
+
+   # Add "All events' option
+   selected_round = st.selectbox('Select a round:', rounds)
+   selected_event = st.selectbox('Select an event:', events)
+   events = []
+   for i in filtered_data.Event:
+      if i not in events:
+         events.append(i)
+      else:
+         pass
+   events = ["All events"] + events
+
+
+   rounds = []
+   for i in filtered_data.Round:
+      if i not in rounds:
+         rounds.append(i)
+      else:
+         pass
+   rounds = ["All rounds"] + rounds
+
+
+
 
    if selected_round!="All rounds":
       filtered_data = filtered_data[filtered_data['Round'] == selected_round]
