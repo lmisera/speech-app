@@ -16,7 +16,7 @@ tab1, tab2 = st.tabs(['Student data','Judge data'])
 #Page 1: Speech students
 # Load data
 with tab1:
-   streamlit_dataframe = pd.read_excel(r'data\Speech_With_Data.xlsx')
+   streamlit_dataframe = pd.read_excel(r'https://github.com/lmisera/speech-app/tree/main/data/Speech_With_Data.xlsx')
 
    print(streamlit_dataframe)
 
