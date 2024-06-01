@@ -47,8 +47,8 @@ with tab1:
 
 
    if selected_event!="All events":
-      filtered_data = filtered_data[filtered_data['Event'] == selected_round]
-      feedback_data = feedback_data[feedback_data['Event'] == selected_round]
+      filtered_data = filtered_data[filtered_data['Event'] == selected_event]
+      feedback_data = feedback_data[feedback_data['Event'] == selected_event]
    else:
       filtered_data = filtered_data
       feedback_data = feedback_data
