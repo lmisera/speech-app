@@ -1,8 +1,6 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
-import openai
-from openai import OpenAI
 import os
 import nltk
 from collections import Counter
@@ -13,18 +11,12 @@ nltk.download('punkt')
 nltk.download('stopwords')
 
 
-
-
-client = OpenAI(
-    api_key = 'sk-proj-2eGeQdHnlMBX8mXuyWzJT3BlbkFJu65H9JivfTxXJSFEuhGV',
-)
-
 tab1, tab2 = st.tabs(['Student data','Judge data'])
 
 #Page 1: Speech students
 # Load data
 with tab1:
-   streamlit_dataframe = pd.read_excel(r'C:\Users\Lucas\OneDrive\python\speech_and_debate\Speech_With_Data.xlsx')
+   streamlit_dataframe = pd.read_excel(r'data\Speech_With_Data.xlsx')
 
    print(streamlit_dataframe)
 
