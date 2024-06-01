@@ -10,13 +10,15 @@ from nltk.util import ngrams
 nltk.download('punkt')
 nltk.download('stopwords')
 
+current_dir = os.path.dirname(__file__)
+data_path = os.path.join(current_dir, 'data', 'Speech_With_Data.xlsx')
 
 tab1, tab2 = st.tabs(['Student data','Judge data'])
 
 #Page 1: Speech students
 # Load data
 with tab1:
-   streamlit_dataframe = pd.read_excel(r'https://github.com/lmisera/speech-app/tree/main/data/Speech_With_Data.xlsx')
+   streamlit_dataframe = pd.read_excel(data_path)
 
    print(streamlit_dataframe)
 
@@ -119,7 +121,7 @@ with tab1:
 #Page 2: Judges
 # Load data
 with tab2:
-   streamlit_dataframe = pd.read_excel(r'C:\Users\Lucas\OneDrive\python\speech_and_debate\Speech_With_Data.xlsx')
+   streamlit_dataframe = pd.read_excel(data_path)
    streamlit_dataframe['Rank'] = streamlit_dataframe['Feedback'].str.extract(r'Rank:\s*(\d+)', expand=False).astype(float)
    streamlit_dataframe["Avg Rank"] = streamlit_dataframe.groupby('Judge')['Rank'].transform('mean')
 
