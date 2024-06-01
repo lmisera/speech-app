@@ -25,25 +25,6 @@ with tab1:
    st.title(f'Data by student')
 
 
-   #Add "All events' option
-   events = []
-   for i in streamlit_dataframe.Event:
-      if i not in events:
-         events.append(i)
-      else:
-         pass
-   events = ["All events"] + events
-
-
-   rounds = []
-   for i in streamlit_dataframe.Round:
-      if i not in rounds:
-         rounds.append(i)
-      else:
-         pass
-   rounds = ["All rounds"] + rounds
-
-
    # Dropdown to select a name
    selected_name = st.selectbox('Select a student:', streamlit_dataframe['Name'].unique())
 
@@ -54,8 +35,6 @@ with tab1:
 
 
    # Add "All events' option
-   selected_round = st.selectbox('Select a round:', rounds)
-   selected_event = st.selectbox('Select an event:', events)
    events = []
    for i in filtered_data.Event:
       if i not in events:
@@ -73,7 +52,8 @@ with tab1:
          pass
    rounds = ["All rounds"] + rounds
 
-
+   selected_round = st.selectbox('Select a round:', rounds)
+   selected_event = st.selectbox('Select an event:', events)
 
 
    if selected_round!="All rounds":
