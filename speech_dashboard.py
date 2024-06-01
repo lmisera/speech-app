@@ -43,6 +43,16 @@ with tab1:
          pass
    events = ["All events"] + events
 
+   selected_event = st.selectbox('Select an event:', events)
+
+
+   if selected_event!="All events":
+      filtered_data = filtered_data[filtered_data['Event'] == selected_round]
+      feedback_data = feedback_data[feedback_data['Event'] == selected_round]
+   else:
+      filtered_data = filtered_data
+      feedback_data = feedback_data
+
 
    rounds = []
    for i in filtered_data.Round:
@@ -53,19 +63,10 @@ with tab1:
    rounds = ["All rounds"] + rounds
 
    selected_round = st.selectbox('Select a round:', rounds)
-   selected_event = st.selectbox('Select an event:', events)
-
 
    if selected_round!="All rounds":
       filtered_data = filtered_data[filtered_data['Round'] == selected_round]
       feedback_data = feedback_data[feedback_data['Round'] == selected_round]
-   else:
-      filtered_data = filtered_data
-      feedback_data = feedback_data
-
-   if selected_event!="All events":
-      filtered_data = filtered_data[filtered_data['Event'] == selected_round]
-      feedback_data = feedback_data[feedback_data['Event'] == selected_round]
    else:
       filtered_data = filtered_data
       feedback_data = feedback_data
