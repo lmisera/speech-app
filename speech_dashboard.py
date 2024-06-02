@@ -125,7 +125,7 @@ with tab1:
 #Page 2: Judges
 # Load data
 with tab2:
-   treamlit_dataframe = pd.read_excel(data_path)
+   streamlit_dataframe = pd.read_excel(data_path)
 
    print(streamlit_dataframe)
 
