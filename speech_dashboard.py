@@ -133,11 +133,11 @@ with tab2:
 
 
    # Dropdown to select a name
-   selected_name = st.selectbox('Select a student:', streamlit_dataframe['Judge'].unique())
+   selected_judge = st.selectbox('Select a student:', streamlit_dataframe['Judge'].unique())
 
    # Filter data for the selected name
-   filtered_data = streamlit_dataframe[streamlit_dataframe['Judge'] == selected_name]
-   feedback_data = streamlit_dataframe[streamlit_dataframe['Judge'] == selected_name]
+   filtered_data = streamlit_dataframe[streamlit_dataframe['Judge'] == selected_judge]
+   feedback_data = streamlit_dataframe[streamlit_dataframe['Judge'] == selected_judge]
 
 
 
@@ -150,12 +150,12 @@ with tab2:
          pass
    events = ["All events"] + events
 
-   selected_event = st.selectbox('Select an event:', events)
+   selected_event2 = st.selectbox('Select an event:', events)
 
 
    if selected_event!="All events":
-      filtered_data = filtered_data[filtered_data['Event'] == selected_event]
-      feedback_data = feedback_data[feedback_data['Event'] == selected_event]
+      filtered_data = filtered_data[filtered_data['Event'] == selected_event2]
+      feedback_data = feedback_data[feedback_data['Event'] == selected_event2]
    else:
       filtered_data = filtered_data
       feedback_data = feedback_data
@@ -169,11 +169,11 @@ with tab2:
          pass
    rounds = ["All rounds"] + rounds
 
-   selected_round = st.selectbox('Select a round:', rounds)
+   selected_round2 = st.selectbox('Select a round:', rounds)
 
    if selected_round!="All rounds":
-      filtered_data = filtered_data[filtered_data['Round'] == selected_round]
-      feedback_data = feedback_data[feedback_data['Round'] == selected_round]
+      filtered_data = filtered_data[filtered_data['Round'] == selected_round2]
+      feedback_data = feedback_data[feedback_data['Round'] == selected_round2]
    else:
       filtered_data = filtered_data
       feedback_data = feedback_data
