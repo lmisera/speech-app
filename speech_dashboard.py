@@ -72,6 +72,24 @@ with tab1:
       feedback_data = feedback_data
 
 
+   judges = []
+   for i in filtered_data.Judge:
+      if i not in rounds:
+         judges.append(i)
+      else:
+         pass
+   judges = ["All rounds"] + judges
+
+   selected_judge = st.selectbox('Select a round:', judges)
+
+   if selected_judge!="All rounds":
+      filtered_data = filtered_data[filtered_data['Judge'] == selected_judge]
+      feedback_data = feedback_data[feedback_data['Judge'] == selected_judge]
+   else:
+      filtered_data = filtered_data
+      feedback_data = feedback_data
+
+
    #Get # of competitions
    number_of_competitions = filtered_data.shape[0]
 
