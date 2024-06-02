@@ -129,14 +129,17 @@ with tab2:
 
    print(streamlit_dataframe)
 
-   st.title(f'Data by judge')
+   st.title(f'Data by Judge')
+
 
    # Dropdown to select a name
-   selected_name = st.selectbox('Select a judge:', streamlit_dataframe['Judge'].unique())
+   selected_name = st.selectbox('Select a student:', streamlit_dataframe['Judge'].unique())
 
    # Filter data for the selected name
    filtered_data = streamlit_dataframe[streamlit_dataframe['Judge'] == selected_name]
    feedback_data = streamlit_dataframe[streamlit_dataframe['Judge'] == selected_name]
+
+
 
    # Add "All events' option
    events = []
@@ -149,12 +152,14 @@ with tab2:
 
    selected_event = st.selectbox('Select an event:', events)
 
-   if selected_event != "All events":
+
+   if selected_event!="All events":
       filtered_data = filtered_data[filtered_data['Event'] == selected_event]
       feedback_data = feedback_data[feedback_data['Event'] == selected_event]
    else:
       filtered_data = filtered_data
       feedback_data = feedback_data
+
 
    rounds = []
    for i in filtered_data.Round:
@@ -166,22 +171,24 @@ with tab2:
 
    selected_round = st.selectbox('Select a round:', rounds)
 
-   if selected_round != "All rounds":
+   if selected_round!="All rounds":
       filtered_data = filtered_data[filtered_data['Round'] == selected_round]
       feedback_data = feedback_data[feedback_data['Round'] == selected_round]
    else:
       filtered_data = filtered_data
       feedback_data = feedback_data
 
-   # Get # of competitions
+
+   #Get # of competitions
    number_of_competitions = filtered_data.shape[0]
+
 
    filtered_data["Avg Rank"] = filtered_data.groupby('Judge')['Rank'].transform('mean')
 
    st.text(f'Average rank: {filtered_data["Avg Rank"].iloc[0]}')
    st.text(f'Number of pieces of feedback: {number_of_competitions}')
 
-   # Get average round by chart
+   #Get average round by chart
    grouped_df = feedback_data.groupby(['Judge', 'Round']).mean('Rank').reset_index()
    fig, ax = plt.subplots()
    for label, group_df in grouped_df.groupby('Judge'):
@@ -195,7 +202,8 @@ with tab2:
    plt.xticks(rotation=90)  # Rotates labels to make them readable
    st.pyplot(plt)
 
-   categories = ['blocking', 'gesture', 'character', 'story', 'diction', 'enunciation', 'eye', 'professional']
+
+   categories = ['blocking','gesture','character','story','diction','enunciation','eye','professional']
 
    # Sum the specified categories for the selected name
    sum_by_category = filtered_data[categories].sum()
@@ -213,9 +221,9 @@ with tab2:
    # Display the plot
    st.pyplot(fig)
 
-   # feedback_data = feedback_data.sort_values(by=['Event','Round'])
+   #feedback_data = feedback_data.sort_values(by=['Event','Round'])
 
-   for i, j in zip(feedback_data['Feedback'], feedback_data['Event']):
+   for i,j in zip(feedback_data['Feedback'],feedback_data['Event']):
       st.text(str(j))
       st.text(str(i))
       st.text("*******\n\n")
