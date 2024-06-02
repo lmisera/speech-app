@@ -142,15 +142,15 @@ with tab2:
 
 
    # Add "All events' option
-   events = []
+   events2 = []
    for i in filtered_data.Event:
-      if i not in events:
-         events.append(i)
+      if i not in events2:
+         events2.append(i)
       else:
          pass
-   events = ["All events"] + events
+   events = ["All events"] + events2
 
-   selected_event2 = st.selectbox('Select an event:', events)
+   selected_event2 = st.selectbox('Select an event:', events2)
 
 
    if selected_event!="All events":
@@ -161,15 +161,15 @@ with tab2:
       feedback_data = feedback_data
 
 
-   rounds = []
+   rounds2 = []
    for i in filtered_data.Round:
-      if i not in rounds:
-         rounds.append(i)
+      if i not in rounds2:
+         rounds2.append(i)
       else:
          pass
-   rounds = ["All rounds"] + rounds
+   rounds = ["All rounds"] + rounds2
 
-   selected_round2 = st.selectbox('Select a round:', rounds)
+   selected_round2 = st.selectbox('Select a round:', rounds2)
 
    if selected_round!="All rounds":
       filtered_data = filtered_data[filtered_data['Round'] == selected_round2]
