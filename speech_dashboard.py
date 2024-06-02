@@ -133,7 +133,7 @@ with tab2:
 
 
    # Dropdown to select a name
-   selected_judge = st.selectbox('Select a student:', streamlit_dataframe['Judge'].unique())
+   selected_judge = st.selectbox('Select a judge:', streamlit_dataframe['Judge'].unique())
 
    # Filter data for the selected name
    filtered_data = streamlit_dataframe[streamlit_dataframe['Judge'] == selected_judge]
@@ -215,7 +215,7 @@ with tab2:
    # Plotting the sums for each category by selected name
    fig, ax = plt.subplots()
    ax.bar(sum_by_category_df['Category'], sum_by_category_df['Sum of 1s'])
-   ax.set_title(f'Feedback for {selected_name}')
+   ax.set_title(f'Feedback for {selected_judge}')
    ax.set_xticklabels(sum_by_category_df['Category'], rotation=90)
 
    # Display the plot
