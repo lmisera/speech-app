@@ -80,7 +80,7 @@ with tab1:
          pass
    judges = ["All rounds"] + judges
 
-   selected_judge = st.selectbox('Select a round:', judges)
+   selected_judge = st.selectbox('Select a judge:', judges)
 
    if selected_judge!="All rounds":
       filtered_data = filtered_data[filtered_data['Judge'] == selected_judge]
