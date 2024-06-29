@@ -1,3 +1,4 @@
+from fuzzywuzzy import process, fuzz
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -28,9 +29,53 @@ with tab1:
    # Dropdown to select a name
    selected_name = st.selectbox('Select a student:', streamlit_dataframe['Name'].unique())
 
+
+   #Search terms
+
+   def fuzzy_search(query, choices, threshold):
+      """Return a list of matches for a given query within a list of choices, including exact matches."""
+      # Exact matches
+      query = str(query)
+      exact_matches = [choice for choice in choices if query.lower() in str(choice).lower()]
+
+      # Fuzzy matches
+      fuzzy_matches = process.extractBests(query, choices, score_cutoff=threshold)
+      fuzzy_matches = [match[0] for match in fuzzy_matches]
+
+      # Combine and deduplicate
+      return list(set(exact_matches + fuzzy_matches))
+
+   # Streamlit interface
+   st.title('Fuzzy Search Example')
+
+   # Input for search terms
+   search_terms = st.text_input('Enter search terms (comma separated)\nTo get most accurate search use root of word (i.e., "charact" instead of "characters"):')
+
+   # Convert search terms to a list
+   if search_terms:
+      search_terms_list = [term.strip() for term in search_terms.split(',')]
+   else:
+      search_terms_list = []
+
+   # Threshold slider
+   threshold = st.slider('Fuzzy matching threshold', 0, 100, 80)
+
+   if search_terms_list:
+      matches = []
+      for term in search_terms_list:
+         matches.extend(fuzzy_search(term, streamlit_dataframe['Feedback'], threshold))
+      matches = list(set(matches))  # Remove duplicates
+
+      # Filter DataFrame based on matches
+      streamlit_dataframe2 = streamlit_dataframe[streamlit_dataframe['Feedback'].isin(matches)]
+   else:
+      streamlit_dataframe2 = streamlit_dataframe
+
+
+
    # Filter data for the selected name
-   filtered_data = streamlit_dataframe[streamlit_dataframe['Name'] == selected_name]
-   feedback_data = streamlit_dataframe[streamlit_dataframe['Name'] == selected_name]
+   filtered_data = streamlit_dataframe2[streamlit_dataframe2['Name'] == selected_name]
+   feedback_data = streamlit_dataframe2[streamlit_dataframe2['Name'] == selected_name]
 
 
 
@@ -134,10 +179,15 @@ with tab1:
 
    #feedback_data = feedback_data.sort_values(by=['Event','Round'])
 
-   for i,j in zip(feedback_data['Feedback'],feedback_data['Event']):
-      st.text(str(j))
-      st.text(str(i))
-      st.text("*******\n\n")
+   for feedback,event in zip(feedback_data['Feedback'],feedback_data['Event']):
+      highlighted_feedback = feedback
+      for term in search_terms_list:
+         if term.lower() in highlighted_feedback.lower():
+            highlighted_feedback = highlighted_feedback.replace(term, f'<mark>{term}</mark>')
+            highlighted_feedback = highlighted_feedback.replace(term, f'<mark>{term}</mark>')
+      st.markdown(f'**Event:** {event}')
+      st.markdown(highlighted_feedback, unsafe_allow_html=True)
+      st.markdown("*******\n\n")
 
 
 #Page 2: Judges
