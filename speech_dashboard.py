@@ -45,11 +45,9 @@ with tab1:
       # Combine and deduplicate
       return list(set(exact_matches + fuzzy_matches))
 
-   # Streamlit interface
-   st.title('Fuzzy Search Example')
 
    # Input for search terms
-   search_terms = st.text_input('Enter search terms (comma separated)\nTo get most accurate search use root of word (i.e., "charact" instead of "characters"):')
+   search_terms = st.text_input('Enter search terms (comma separated). Leave blank if no specific terms are desired. To get most accurate search use root of word (i.e., "charact" instead of "characters"):')
 
    # Convert search terms to a list
    if search_terms:
