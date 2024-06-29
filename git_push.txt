@@ -1,0 +1,4 @@
+cd "C:\Users\Lucas\OneDrive\python\speech_and_debate"
+git add speech_dashboard.py
+git commit -m "New_Version 2"
+git push origin main
